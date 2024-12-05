@@ -33,3 +33,13 @@ services:
     ports:
       - "5432:5432"
     restart: always
+  clima:
+    build:
+      context: ../api_clima
+    container_name: api_clima
+    ports:
+      - "3000:3000"
+    env_file:
+      - ../api_clima/.env
+    volumes:
+      - ../api_clima:/app

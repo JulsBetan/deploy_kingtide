@@ -30,3 +30,10 @@ services:
     ports:
       - "5432:5432"
     restart: always
+
+  clima:
+    image: julbetan/api_clima:latest
+    container_name: api_clima
+    ports:
+      - "3000:3000"
+    restart: always
