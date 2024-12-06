@@ -36,6 +36,7 @@ services:
   clima:
     build:
       context: ../api_clima
+      dockerfile: Dockerfile.dev
     container_name: api_clima
     ports:
       - "3000:3000"
@@ -43,3 +44,11 @@ services:
       - ../api_clima/.env
     volumes:
       - ../api_clima:/app
+  scheduler:
+    build:
+      context: ./
+      dockerfile: Dockerfile.scheduler
+    container_name: update-events-scheduler
+    depends_on:
+      - api
+    restart: always

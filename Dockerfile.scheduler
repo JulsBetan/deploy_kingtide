@@ -1,0 +1,12 @@
+FROM python:3.12-slim
+
+# Configurar directorio de trabajo
+WORKDIR /app
+
+# Copiar dependencias y script
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY update_events_scheduler.py .
+
+# Definir el comando de inicio
+CMD ["python", "update_events_scheduler.py"]

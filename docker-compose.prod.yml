@@ -37,3 +37,8 @@ services:
     ports:
       - "3000:3000"
     restart: always
+  
+  scheduler:
+    image: julbetan/update_events_scheduler:latest
+    container_name: update_events_scheduler
+    restart: always
