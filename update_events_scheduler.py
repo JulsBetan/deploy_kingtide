@@ -18,7 +18,7 @@ def update_events():
 
 if __name__ == "__main__":
     import schedule
-    schedule.every(2).hours.do(update_events)
+    schedule.every(10).minutes.do(update_events)
 
     print("Servicio programado para actualizar eventos cada 2 horas.")
     while True:
