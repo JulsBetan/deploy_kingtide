@@ -2,8 +2,8 @@ import time
 import requests
 from datetime import datetime
 
-UPDATE_EVENTS_URL = "http://localhost:8000/events/update-events"
-# UPDATE_EVENTS_URL = "http://api_deportes:8000/events/update-events"
+# UPDATE_EVENTS_URL = "http://localhost:8000/events/update-events"
+UPDATE_EVENTS_URL = "http://api_deportes:8000/events/update-events"
 
 def update_events():
     try:
