@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - ENVIRONMENT=.prod_env
+      - ENVIRONMENT=production
     depends_on:
       - db
     restart: always

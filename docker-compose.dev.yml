@@ -6,8 +6,8 @@ services:
     container_name: api_deportes
     ports:
       - "8000:8000"
-    env_file:
-      - ../api_deportes/.dev_env
+    environment:
+      - ENVIRONMENT=development
     volumes:
       - ../api_deportes:/app
     depends_on:
