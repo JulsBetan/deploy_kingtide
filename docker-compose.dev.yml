@@ -3,6 +3,7 @@ services:
   api:
     build:
       context: ../api_deportes
+      dockerfile: Dockerfile.dev
     container_name: api_deportes
     ports:
       - "8000:8000"

@@ -16,7 +16,7 @@ services:
     image: julbetan/frontend_kingtide:latest
     container_name: frontend_kingtide
     ports:
-      - "80:80"
+      - "8080:80"
     restart: always
 
   db:

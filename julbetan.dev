@@ -1,0 +1,54 @@
+server {
+    # Manejar tráfico HTTPS
+    listen 443 ssl; # managed by Certbot
+    server_name julbetan.dev www.julbetan.dev;
+
+    # Certificados SSL
+    ssl_certificate /etc/letsencrypt/live/julbetan.dev/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/julbetan.dev/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    # Proxy hacia el frontend
+    location / {
+        proxy_pass http://127.0.0.1:8080; # Puerto donde escucha el contenedor del frontend
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Proxy hacia el backend
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000; # Puerto donde escucha el backend
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Opcionales: Mejora de seguridad HTTPS
+    add_header X-Frame-Options DENY;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # Bloque para Certbot (renovación automática)
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+}
+
+server {
+    # Manejar tráfico HTTP y redirigirlo a HTTPS
+    listen 80;
+    server_name julbetan.dev www.julbetan.dev;
+
+    # Bloque para Certbot (renovación automática)
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    # Redirige todo el tráfico HTTP a HTTPS
+    return 301 https://$host$request_uri;
+}
