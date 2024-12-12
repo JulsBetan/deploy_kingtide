@@ -3,6 +3,8 @@ version: "3.9"
 services:
   api:
     image: julbetan/api_deportes:latest
+    networks:
+      - deploy_kingtide_default
     container_name: api_deportes
     ports:
       - "8000:8000"
@@ -14,6 +16,8 @@ services:
 
   frontend:
     image: julbetan/frontend_kingtide:latest
+    networks:
+      - deploy_kingtide_default
     container_name: frontend_kingtide
     ports:
       - "8080:80"
@@ -21,6 +25,8 @@ services:
 
   db:
     image: postgres:alpine
+    networks:
+      - deploy_kingtide_default
     container_name: deportes-db
     environment:
       POSTGRES_PASSWORD: password
@@ -33,6 +39,8 @@ services:
 
   clima:
     image: julbetan/api_clima:latest
+    networks:
+      - deploy_kingtide_default
     container_name: api_clima
     ports:
       - "3000:3000"
@@ -40,5 +48,15 @@ services:
   
   scheduler:
     image: julbetan/update_events_scheduler:latest
+    networks:
+      - deploy_kingtide_default
     container_name: update_events_scheduler
     restart: always
+
+  networks:
+    deploy_kingtide_default:
+      driver: bridge
+      ipam:
+        config:
+          - subnet: 172.21.0.0/16
+            gateway: 172.21.0.1
