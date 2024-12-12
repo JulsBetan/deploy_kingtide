@@ -53,10 +53,10 @@ services:
     container_name: update_events_scheduler
     restart: always
 
-  networks:
-    deploy_kingtide_default:
-      driver: bridge
-      ipam:
-        config:
-          - subnet: 172.21.0.0/16
-            gateway: 172.21.0.1
+networks:
+  deploy_kingtide_default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1
