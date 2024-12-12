@@ -55,6 +55,7 @@ services:
 
 networks:
   deploy_kingtide_default:
+    name: deploy_kingtide_default
     driver: bridge
     ipam:
       config:
