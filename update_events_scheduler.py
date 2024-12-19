@@ -27,7 +27,7 @@ def update_events():
     la tabla de próximos eventos.
     """
     try:
-        response = requests.post(UPDATE_EVENTS_URL, timeout=(5, 10))
+        response = requests.post(UPDATE_EVENTS_URL, timeout=(5, 120))
         if response.status_code == 200:
             update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             logging.info("Actualización exitosa a las: %s", update_time)
@@ -40,7 +40,7 @@ def update_events():
 
 
 if __name__ == "__main__":
-    schedule.every(2).hours.do(update_events)
+    schedule.every(10).minutes.do(update_events)
 
     logging.info("Servicio programado para actualizar eventos cada 2 horas.")
     try:
