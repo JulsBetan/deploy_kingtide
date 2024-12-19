@@ -40,7 +40,7 @@ def update_events():
 
 
 if __name__ == "__main__":
-    schedule.every(10).minutes.do(update_events)
+    schedule.every(2).hours.do(update_events)
 
     logging.info("Servicio programado para actualizar eventos cada 2 horas.")
     try:
