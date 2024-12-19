@@ -51,6 +51,8 @@ services:
     networks:
       - deploy_kingtide_default
     container_name: update_events_scheduler
+    environment:
+      - PYTHONUNBUFFERED=1
     restart: always
 
 networks:
